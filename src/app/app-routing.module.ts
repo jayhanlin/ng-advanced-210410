@@ -15,8 +15,12 @@ const routes: Routes = [
   {
     path: 'utilities',
     children: [
-      { path: 'color', component: ColorComponent },
-      { path: 'color/:type', component: ColorComponent },//:type必要參數，如沒給此參數會進404
+      { path: 'color', component: ColorComponent , data: { seoTitle: 'N/A' } },
+      { path: 'color/:type', component: ColorComponent ,
+      data: {
+        seo: {title:'Color', desc: ''}
+      }
+    },//:type必要參數，如沒給此參數會進404
     ]
   },
   { path: '**', component: NotFoundComponent }, //萬用路由，任何找不到Path都會進來此Component，且要放在最後，放上面時，會比對到，整個網站都會進NotFoundComponent

@@ -28,9 +28,21 @@ export class ColorComponent implements OnInit {
     // this.route.params.subscribe(params => {
     //   this.type = params.get('type');
     // });
+    this.readData();
+  }
+
+  readData() {
+    let seo = this.route.snapshot.data["seo"] as SeoData;
+    console.log(seo.title);
   }
 
   plusOne() {
     this.router.navigate(['/utilities/color/', this.type + 1])
   }
+
+}
+
+interface SeoData {
+  title: string;
+  desc: string
 }
