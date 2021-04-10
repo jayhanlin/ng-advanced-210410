@@ -1,3 +1,4 @@
+import { AuthGuard } from './auth.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -10,7 +11,7 @@ const routes: Routes = [
   // { path: '', component: DashboardComponent },  // 首頁直接導去DashboardComponent 寫法1
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' }, // 首頁直接導去DashboardComponent 寫法2
   { path: 'page1', component: Page1Component },
-  { path: 'page2', component: Page2Component },
+  { path: 'page2', component: Page2Component,canActivate:[AuthGuard] },
   { path: 'dashboard', component: DashboardComponent },
   {
     path: 'utilities',
