@@ -23,7 +23,7 @@ const routes: Routes = [
     },//:type必要參數，如沒給此參數會進404
     ]
   },
-  { path: 'Components', loadChildren: () => import('./components/components.module').then(m => m.ComponentsModule) },
+  { path: 'components', loadChildren: () => import('./components/components.module').then(m => m.ComponentsModule) },
   { path: '**', component: NotFoundComponent }, //萬用路由，任何找不到Path都會進來此Component，且要放在最後，放上面時，會比對到，整個網站都會進NotFoundComponent
 ];//在此新增路由規則
 
