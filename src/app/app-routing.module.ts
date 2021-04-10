@@ -6,10 +6,12 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { Page1Component } from './page1/page1.component';
 import { Page2Component } from './page2/page2.component';
 import { ColorComponent } from './utilities/color/color.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   // { path: '', component: DashboardComponent },  // 首頁直接導去DashboardComponent 寫法1
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' }, // 首頁直接導去DashboardComponent 寫法2
+  { path: 'login', component: LoginComponent },
   { path: 'page1', component: Page1Component },
   { path: 'page2', component: Page2Component,canActivate:[AuthGuard] },
   { path: 'dashboard', component: DashboardComponent },

@@ -8,6 +8,7 @@ import { Page2Component } from './page2/page2.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ColorComponent } from './utilities/color/color.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ColorComponent } from './utilities/color/color.component';
     Page2Component,
     DashboardComponent,
     NotFoundComponent,
-    ColorComponent
+    ColorComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
