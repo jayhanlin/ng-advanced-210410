@@ -8,14 +8,16 @@ import { Page2Component } from './page2/page2.component';
 import { ColorComponent } from './utilities/color/color.component';
 import { LoginComponent } from './login/login.component';
 import { LayoutComponent } from './layout/layout.component';
+import { Auth2Guard } from './auth2.guard';
 
 const routes: Routes = [
   // { path: '', component: DashboardComponent },  // 首頁直接導去DashboardComponent 寫法1
   {
-    path: '', component: LayoutComponent, children: [
+    path: '', component: LayoutComponent, canActivateChild: [Auth2Guard], //更換成canActivateChild時，切換每一個Component時都會檢核Auth2Guard狀態
+    children: [
       { path: '', pathMatch: 'full', redirectTo: 'dashboard' }, // 首頁直接導去DashboardComponent 寫法2
       { path: 'page1', component: Page1Component },
-      { path: 'page2', component: Page2Component, canActivate: [AuthGuard] },
+      { path: 'page2', component: Page2Component },
       { path: 'dashboard', component: DashboardComponent },
       {
         path: 'utilities',
