@@ -36,10 +36,16 @@ export class Login2Component implements OnInit, OnDestroy {
         updateOn: 'change'
       }),
       isRememberMe: true,
-      extra: this.fb.group({
-        name: this.fb.control(''),
-        tel: this.fb.control('')
-      })
+      extra: this.fb.array([
+        this.fb.group({
+          name: this.fb.control(''),
+          tel: this.fb.control('')
+        }),
+        this.fb.group({
+          name: this.fb.control(''),
+          tel: this.fb.control('')
+        }),
+      ])
     })
   }
 
