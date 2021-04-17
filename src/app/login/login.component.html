@@ -18,14 +18,14 @@
                 <pre>data = {{ data | json }}</pre>
                 <pre>form.value = {{ form.value | json }}</pre>
                 <form class="user" #form="ngForm">
-                  <div class="form-group" [class.was-validated]="form.dirty && form.invalid">
+                  <div class="form-group" [class.was-validated]="form.touched && form.invalid">
                     <input type="email" class="form-control form-control-user" aria-describedby="emailHelp"
                       placeholder="Enter Email Address..." [(ngModel)]="data.email" name="email" #mEmail="ngModel" required email>
                     <!-- 如真不想放name 可加上[ngModelOptions]="{standalone: true} 但submit時將不會送出該值-->
                     <!--  placeholder="Enter Email Address..." [(ngModel)]="data.email" [ngModelOptions]="{standalone: true}" #mEmail="ngModel"> -->
                     <!-- 不應該使用value="will"給預設值，應在ngModel內給預設值 -->
-                    <div class="invalid-feedback" *ngIf="mEmail.errors.required">請輸入密碼</div>
-
+                    <div class="invalid-feedback" *ngIf="mEmail.invalid && mEmail.dirty && mEmail.errors.required">請輸入密碼</div>
+                    <div class="invalid-feedback" *ngIf="mEmail.invalid && mEmail.dirty && mEmail.errors.email">請輸入正確的 Email 格式</div>
                   </div>
                   <pre>value = {{ mEmail.value | json }}
                     pristine = {{ mEmail.pristine | json }}
@@ -43,9 +43,16 @@
                     <input type="password" class="form-control form-control-user" placeholder="Password"
                       [(ngModel)]="data.password" name="password" #mPassword="ngModel"
                       required minlength="3" maxlength="32" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{3,32}$">
-                      <div class="invalid-feedback" *ngIf="mPassword.errors.required">請輸入密碼</div>
-                      <div class="invalid-feedback" *ngIf="mPassword.errors.minlength">密碼請輸入至少 {{mPassword.errors.minlength.requiredLength}} 個字元</div>
-                      <div class="invalid-feedback" *ngIf="mPassword.errors.pattern">請輸入符合規定的密碼</div>
+                      <!-- 遇到required undefind Error 時的解法 -->
+                      <!-- 解法A 不建議用此方法，因為有可能取不到值-->
+                      <div class="invalid-feedback" *ngIf="mPassword.errors?.required">請輸入密碼</div>
+                      <div class="invalid-feedback" *ngIf="mPassword.errors?.minlength">密碼請輸入至少 {{mPassword.errors.minlength.requiredLength}} 個字元</div>
+                      <div class="invalid-feedback" *ngIf="mPassword.errors?.pattern">請輸入符合規定的密碼</div>
+                      <!-- 解法B 寶哥建議用此方式進行判斷-->
+                      <div class="invalid-feedback" *ngIf="mPassword.invalid && mPassword.errors.required">請輸入密碼</div>
+                      <div class="invalid-feedback" *ngIf="mPassword.invalid && mPassword.errors.minlength">密碼請輸入至少
+                        {{mPassword.errors.minlength.requiredLength}} 個字元</div>
+                      <div class="invalid-feedback" *ngIf="mPassword.invalid && mPassword.errors.pattern">請輸入符合規定的密碼</div>
                       <pre>errors = {{ mPassword.errors | json }}</pre>
                   </div>
                   <div class="form-group">
