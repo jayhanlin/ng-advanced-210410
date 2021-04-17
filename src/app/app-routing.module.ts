@@ -9,6 +9,7 @@ import { ColorComponent } from './utilities/color/color.component';
 import { LoginComponent } from './login/login.component';
 import { LayoutComponent } from './layout/layout.component';
 import { Auth2Guard } from './auth2.guard';
+import { Login2Component } from './login2/login2.component';
 
 const routes: Routes = [
   // { path: '', component: DashboardComponent },  // 首頁直接導去DashboardComponent 寫法1
@@ -35,7 +36,8 @@ const routes: Routes = [
       { path: 'components', loadChildren: () => import('./components/components.module').then(m => m.ComponentsModule) },
     ]
   },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent },// 以範本為主的表單開發模式 Template-Driven Form
+  { path: 'login2', component: Login2Component },// 以模型為主的表單開發模式 Reactive Forms(Model-Driven Form)
   { path: '**', component: NotFoundComponent }, //萬用路由，任何找不到Path都會進來此Component，且要放在最後，放上面時，會比對到，整個網站都會進NotFoundComponent
 ];//在此新增路由規則
 
