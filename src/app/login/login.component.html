@@ -18,6 +18,9 @@
                 <pre>data = {{ data | json }}</pre>
                 <pre>form.value = {{ form.value | json }}</pre>
                 <form class="user" #form="ngForm" (ngSubmit)="onSubmit(form)" [class.was-validated]="form.touched && form.invalid">
+                  <!-- 寶哥建議submit時送出form.value內容，因form.value是唯獨，且只能透過使用這變更，disable的input value不會被送出 -->
+                  <!-- 如送出 data 且使用雙向繫結，則原始資料有可能被修改後送出 -->
+                  <!-- 使用情境:當表單內有 default data 且有 Reload button 可從Server重新取得資料，且不希望 default data 被使用者修改後送出 -->
                   <div class="form-group">
                     <input type="email" class="form-control form-control-user" aria-describedby="emailHelp"
                       placeholder="Enter Email Address..." [ngModel]="data.email" name="email" #mEmail="ngModel" required email>
