@@ -46,6 +46,12 @@ export class Login2Component implements OnInit, OnDestroy {
     }
   }
 
+  showError(name, validation) {
+    return this.form.get(name).invalid
+      && this.form.get(name).dirty
+      && this.form.get(name).errors[validation];
+  }
+
   ngOnDestroy(): void {
     document.body.className = this.origClass;
   }
