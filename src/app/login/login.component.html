@@ -21,6 +21,10 @@
                   <div class="form-group">
                     <input type="email" class="form-control form-control-user" aria-describedby="emailHelp"
                       placeholder="Enter Email Address..." [(ngModel)]="data.email" name="email" #mEmail="ngModel">
+                    <!--  placeholder="Enter Email Address..." [(ngModel)]="data.email" [ngModelOptions]="{standalone: true}"
+                    #mEmail="ngModel"> -->
+                    <!-- 如真不想放name 可加上[ngModelOptions]="{standalone: true} 但submit時將不會送出該值-->
+
                   </div>
                   <pre>value = {{ mEmail.value | json }}
                     pristine = {{ mEmail.pristine | json }}
