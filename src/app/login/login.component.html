@@ -18,12 +18,13 @@
                 <pre>data = {{ data | json }}</pre>
                 <pre>form.value = {{ form.value | json }}</pre>
                 <form class="user" #form="ngForm">
-                  <div class="form-group">
+                  <div class="form-group" [class.was-validated]="form.dirty && form.invalid">
                     <input type="email" class="form-control form-control-user" aria-describedby="emailHelp"
-                      placeholder="Enter Email Address..." [(ngModel)]="data.email" name="email" #mEmail="ngModel">
+                      placeholder="Enter Email Address..." [(ngModel)]="data.email" name="email" #mEmail="ngModel" required email>
                     <!-- 如真不想放name 可加上[ngModelOptions]="{standalone: true} 但submit時將不會送出該值-->
                     <!--  placeholder="Enter Email Address..." [(ngModel)]="data.email" [ngModelOptions]="{standalone: true}" #mEmail="ngModel"> -->
                     <!-- 不應該使用value="will"給預設值，應在ngModel內給預設值 -->
+                    <div class="invalid-feedback" *ngIf="mEmail.errors.required">請輸入密碼</div>
 
                   </div>
                   <pre>value = {{ mEmail.value | json }}
@@ -40,7 +41,12 @@
                     </pre>
                   <div class="form-group">
                     <input type="password" class="form-control form-control-user" placeholder="Password"
-                      [(ngModel)]="data.password" name="password" #mPassword="ngModel">
+                      [(ngModel)]="data.password" name="password" #mPassword="ngModel"
+                      required minlength="3" maxlength="32" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{3,32}$">
+                      <div class="invalid-feedback" *ngIf="mPassword.errors.required">請輸入密碼</div>
+                      <div class="invalid-feedback" *ngIf="mPassword.errors.minlength">密碼請輸入至少 {{mPassword.errors.minlength.requiredLength}} 個字元</div>
+                      <div class="invalid-feedback" *ngIf="mPassword.errors.pattern">請輸入符合規定的密碼</div>
+                      <pre>errors = {{ mPassword.errors | json }}</pre>
                   </div>
                   <div class="form-group">
                     <div class="custom-control custom-checkbox small">
