@@ -58,6 +58,7 @@ export class Login2Component implements OnInit, OnDestroy {
     }
 
     this.form.setValue(this.data);
+    // this.form.setValue 單純把值替換，不把input的狀態回歸初始
   }
 
   resetForm() {
@@ -68,6 +69,7 @@ export class Login2Component implements OnInit, OnDestroy {
     }
 
     this.form.reset(this.data);
+    // this.form.reset 會清空 input 值之外，也會把input的狀態回歸初始 Ex:pristine、dirty、touched、untouched...
   }
 
   makeExtra() {
