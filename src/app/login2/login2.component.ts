@@ -20,8 +20,21 @@ export class Login2Component implements OnInit, OnDestroy {
     document.body.className = 'bg-gradient-primary';
 
     this.form = this.fb.group({
-      email: ['user1@example.com', [Validators.required, Validators.email]],
-      password: ['123qweQWE', [Validators.required, Validators.minLength(3), Validators.maxLength(32)]],
+      email: new FormControl('user1@example.com', {
+        validators: [
+          Validators.required,
+          Validators.email
+        ],
+        updateOn: 'blur'
+      }),
+      password: this.fb.control('123ABCabc', {
+        validators: [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(32)
+        ],
+        updateOn: 'change'
+      }),
       isRememberMe: true,
     })
   }
