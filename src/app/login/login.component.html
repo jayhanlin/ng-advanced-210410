@@ -17,13 +17,13 @@
                 </div>
                 <pre>data = {{ data | json }}</pre>
                 <pre>form.value = {{ form.value | json }}</pre>
-                <form class="user" #form="ngForm" (ngSubmit)="onSubmit(form)" [class.was-validated]="form.touched && form.invalid">
+                <form class="user" #form="ngForm" (ngSubmit)="onSubmit(form)">
                   <!-- 寶哥建議submit時送出form.value內容，因form.value是唯獨，且只能透過使用這變更，disable的input value不會被送出 -->
                   <!-- 如送出 data 且使用雙向繫結，則原始資料有可能被修改後送出 -->
                   <!-- 使用情境:當表單內有 default data 且有 Reload button 可從Server重新取得資料，且不希望 default data 被使用者修改後送出 -->
                   <div class="form-group">
-                    <input type="email" class="form-control form-control-user" aria-describedby="emailHelp"
-                      placeholder="Enter Email Address..." [ngModel]="data.email" name="email" #mEmail="ngModel" required email>
+                    <input type="email" class="form-control form-control-user" [class.is-invalid]="mEmail.touched && mEmail.invalid"
+                    aria-describedby="emailHelp" placeholder="Enter Email Address..." [ngModel]="data.email" name="email" #mEmail="ngModel" required email>
                     <!-- 如真不想放name 可加上[ngModelOptions]="{standalone: true} 但submit時將不會送出該值-->
                     <!--  placeholder="Enter Email Address..." [(ngModel)]="data.email" [ngModelOptions]="{standalone: true}" #mEmail="ngModel"> -->
                     <!-- 不應該使用value="will"給預設值，應在ngModel內給預設值 -->
@@ -43,8 +43,8 @@
                     errors = {{ mEmail.errors | json }}
                     </pre>
                   <div class="form-group">
-                    <input type="password" class="form-control form-control-user" placeholder="Password"
-                      [ngModel]="data.password" name="password" #mPassword="ngModel"
+                    <input type="password" class="form-control form-control-user" [class.is-invalid]="mPassword.touched && mPassword.invalid"
+                    placeholder="Password" [ngModel]="data.password" name="password" #mPassword="ngModel"
                       required minlength="3" maxlength="32" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{3,32}$">
                       <!-- 遇到required undefind Error 時的解法 -->
                       <!-- 解法A 不建議用此方法，因為有可能取不到值-->
